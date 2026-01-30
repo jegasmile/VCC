@@ -1,5 +1,24 @@
 # Microservices deployment on VMs
 
+## Prerequsites
+
+* We have Ubuntu server which has python3 installed by default
+* Run below step to setup python virtual environment to host microservices
+```
+sudo apt update
+sudo apt install -y python3-full python3-venv python3-pip build-essential
+cd /root
+mkdir microservices
+cd  microservices
+python3 -m venv venv
+source venv/bin/activate
+(venv) jegadeesh@server1:root/microservices$
+pip install fastapi uvicorn requests gunicorn
+python -c "import fastapi, uvicorn; print('OK')"
+```
+
+* Repeat above steps in Server2 VM as well
+
 ## VM Server1
 
 * Login to server1 from local MAC using SSH
