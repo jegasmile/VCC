@@ -3,7 +3,7 @@ set -e
 
 PROJECT_ID="mtech-ai-vcc"
 ZONE="asia-south1-a"
-INSTANCE_NAME="burst-vm-$(date +%Y%m%d-%H%M%S)"
+INSTANCE_NAME="burst-vm-$(date +%s)"
 
 gcloud compute instances create "$INSTANCE_NAME" \
   --project="$PROJECT_ID" \
