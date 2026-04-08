@@ -4,7 +4,6 @@ import time
 import joblib
 import threading
 import pandas as pd
-import pywhatkit
 import requests
 
 MODEL_PATH = "ids_model.pkl"
@@ -12,12 +11,12 @@ SCALER_PATH = "ids_scaler.pkl"
 META_PATH = "ids_meta.pkl"
 
 LOG_FILES = [
-    "/var/log/wifi.log",
-    "/var/log/system.log",
-    "/var/log/install.log",
-    "/var/log/fsck_apfs.log",
-    "/var/log/appfirewall.log",
-    "/Users/jegadeesh/Desktop/Jegadeesh/Python/test_ids.log"
+    "/var/log/auth.log",
+    "/var/log/kern.log",
+    "/var/log/user.log",
+    "/var/log/cron.log",
+    "/var/log/alternatives.log",
+    "/home/jegadeesh/VCC/course_project/test_ids.log"
 ]
 
 ALERT_FILE = "ids_alerts.log"
@@ -129,10 +128,6 @@ def tail_file(path):
                 time.sleep(1)
                 continue
             yield line.rstrip("\n")
-def send_whatsapp_alert(message):
-    pywhatkit.sendwhatmsg("+919789383456", 
-                      message, 
-                      18, 30)
 def monitor_file(path, model, scaler, feature_cols):
     print(f"Monitoring: {path}")
 
@@ -161,7 +156,6 @@ def monitor_file(path, model, scaler, feature_cols):
                 print(alert)
                 with open(ALERT_FILE, "a", encoding="utf-8") as af:
                     af.write(alert + "\n")
-                send_whatsapp_alert(alert)
     except Exception as e:
         print(f"Error monitoring {path}: {e}")
 
